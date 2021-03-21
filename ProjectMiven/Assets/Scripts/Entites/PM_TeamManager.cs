@@ -10,6 +10,8 @@ public class PM_TeamManager
 
     [SerializeField] List<PM_Entity> team = new List<PM_Entity>();
 
+    public List<PM_Entity> Team { get => team; }
+
     #region TeamManage
 
     #region Add

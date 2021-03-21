@@ -80,7 +80,7 @@ public class PM_Stats
 
     #endregion
 
-    void ManageStat(Stats _stats, float _value, bool _add)
+    public void ManageStat(Stats _stats, float _value, bool _add)
     {
         switch (_stats)
         {

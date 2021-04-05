@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
@@ -15,9 +16,12 @@ public class PM_PrimaryNetworkManager : MonoBehaviourPunCallbacks
 {
     string nameServ = "[MotherServer]";
 
-    protected PM_NetworkType _networkType = PM_NetworkType.None;
+    protected PM_NetworkType networkType = PM_NetworkType.None;
 
     protected List<RoomInfo> roomInfos;
+
+    protected TypedLobby lobby = new TypedLobby("MivenLobby", LobbyType.Default);
+
 
     private void Start()
     {
@@ -31,14 +35,26 @@ public class PM_PrimaryNetworkManager : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         base.OnConnectedToMaster();
-        PhotonNetwork.JoinLobby();
+        PhotonNetwork.JoinLobby(lobby);
     }
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
         base.OnRoomListUpdate(roomList);
 
-        roomInfos = roomList;
+        Debug.Log(roomList.Count);
+
     }
 
+    [PunRPC]
+    public void PrimaryRPC(PM_NetworkType _byType, PM_NetworkType _forType,  Action _callBack)
+    {
+        _callBack.Invoke();
+    }
+
+    [PunRPC]
+    public void PrimaryRPC<T1>(PM_NetworkType _byType, PM_NetworkType _forType, Action<T1> _callBack, T1 _t1)
+    {
+        _callBack.Invoke(_t1);
+    }
 
 }

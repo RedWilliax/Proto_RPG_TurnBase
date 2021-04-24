@@ -9,8 +9,8 @@ public class PM_ServerNetworkManager : PM_PrimaryNetworkManager
 {
     Action OnInstantiate = null;
 
-    [SerializeField] string _nameServ = "Default_Name";
-    [SerializeField] int _maxPlayer = 2;
+    [SerializeField] string nameServer = "Default_Name";
+    [SerializeField] int maxPlayer = 2;
 
     private void Awake()
     {
@@ -35,10 +35,9 @@ public class PM_ServerNetworkManager : PM_PrimaryNetworkManager
     void InitialisationServer()
     {
         //Various RPC boot Server
+        RPC(RpcTarget.OthersBuffered, networkType, PM_NetworkType.Client, OnInstantiate);
 
         //RPC Player
-
-        photonView.RPC("PrimaryRPC", RpcTarget.OthersBuffered, networkType, PM_NetworkType.Client, OnInstantiate);
 
         //IA
 
@@ -48,6 +47,11 @@ public class PM_ServerNetworkManager : PM_PrimaryNetworkManager
 
     void InstantiateServer()
     {
+        // Instantiate Server Entity
+
+        // Instantiate Other player 
+
+        // Instantiate NPC
 
     }
 
@@ -56,6 +60,8 @@ public class PM_ServerNetworkManager : PM_PrimaryNetworkManager
         RoomOptions _roomSettings = new RoomOptions()
         {
             MaxPlayers = (byte)_maxPlayer
+
+            // Custome properties O/C Server
         };
 
         PhotonNetwork.JoinOrCreateRoom(_servName, _roomSettings, lobby);
@@ -68,12 +74,11 @@ public class PM_ServerNetworkManager : PM_PrimaryNetworkManager
 
     private void OnGUI()
     {
-
         GUILayout.BeginArea(new Rect(new Vector2(100, 100), new Vector2(150, 100)));
 
         if (GUILayout.Button("CreateRoom"))
         {
-            CreateServer(_nameServ, _maxPlayer);
+            CreateServer(nameServer, maxPlayer);
         }
 
        // GUILayout.Label($"Room List Count : {roomInfos.Count}");

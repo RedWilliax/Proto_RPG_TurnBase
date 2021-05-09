@@ -152,6 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 617099f783c6e4542ba5cdec62db3f02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameServer: Default_Name
+  maxPlayer: 2
 --- !u!4 &1427936425
 Transform:
   m_ObjectHideFlags: 0

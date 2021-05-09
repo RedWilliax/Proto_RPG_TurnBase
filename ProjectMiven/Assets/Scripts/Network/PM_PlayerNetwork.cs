@@ -4,10 +4,6 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class PM_PlayerNetwork : MonoBehaviourPunCallbacks, IPunObservable
+public class PM_PlayerNetwork : PM_PrimaryEntityNetwork
 {
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        
-    }
 }

@@ -6,14 +6,6 @@ using Photon.Realtime;
 
 public class PM_PlayerNetworkManager : PM_PrimaryNetworkManager
 {
-
-
-    private void Awake()
-    {
-        networkType = PM_NetworkType.Client;
-    }
-
-
     void JoinServer(string _nameServer)
     {
         // Sercutiry for full room

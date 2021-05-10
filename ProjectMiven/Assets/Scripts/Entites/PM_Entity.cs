@@ -5,19 +5,32 @@ using UnityEngine;
 public class PM_Entity : MonoBehaviour
 {
 
-    [SerializeField] uint id; //random number give at connection
+    [SerializeField] protected uint id; //random number give at connection
 
-    [SerializeField] PM_Stats stats;
+    [SerializeField] protected PM_Stats stats;
 
-    [SerializeField] PM_TeamManager teamManager;
+    [SerializeField] protected PM_TeamManager teamManager;
 
-    [SerializeField] List<PM_Skill> allSkills;
+    [SerializeField] protected List<PM_Skill> allSkills;
 
-    [SerializeField] List<PM_Effect> allEffects; // Apply each turn 
+    [SerializeField] protected List<PM_Effect> allEffects; // Apply each turn 
+
+    [SerializeField] protected PM_Movement movement;
 
     public PM_Stats Stats { get => stats; }
     public PM_TeamManager TeamManager { get => teamManager; }
     public uint ID { get => id; }
+
+    private void Awake()
+    {
+        movement.InitMovement(this);
+
+        teamManager.AddEntite(this);
+    }
+
+    private void Start()
+    {
+    }
 
     #region ManageEffect
 
@@ -32,8 +45,5 @@ public class PM_Entity : MonoBehaviour
 
 
     #endregion
-
-
-
 
 }

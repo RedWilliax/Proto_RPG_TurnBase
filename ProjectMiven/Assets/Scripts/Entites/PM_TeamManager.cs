@@ -7,10 +7,13 @@ using UnityEngine;
 [Serializable]
 public class PM_TeamManager
 {
-
     [SerializeField] List<PM_Entity> team = new List<PM_Entity>();
 
+   // Pm_pl managerTeam = null;
+
     public List<PM_Entity> Team { get => team; }
+
+  //  public PM_Entity TeamManager { get => managerTeam; }
 
     #region TeamManage
 
@@ -24,6 +27,8 @@ public class PM_TeamManager
     public void AddEntite(PM_Entity _entite)
     {
         ManageTeam(true, _entite);
+        _entite.TeamManager.AddEntites(team);
+
     }
     #endregion
 

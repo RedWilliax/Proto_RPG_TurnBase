@@ -18,6 +18,11 @@ public class PM_MousePointer : MonoBehaviour
 
     public static Vector3 DistanceOwnerToTarget => distanceOwnerToTarget;
 
+    private void Start()
+    {
+        owner.SubscribeMove();
+    }
+
     private void LateUpdate()
     {
         ComputeMousePointer();

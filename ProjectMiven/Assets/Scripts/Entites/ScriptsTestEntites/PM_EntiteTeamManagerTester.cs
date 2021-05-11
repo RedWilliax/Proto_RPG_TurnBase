@@ -5,12 +5,14 @@ using UnityEngine;
 public class PM_EntiteTeamManagerTester : MonoBehaviour
 {
     [SerializeField] public List<PM_Entity> entite;
+    [SerializeField] PM_TeamManager teamManager;
+
 
     public void TeamUp(List<PM_Entity> _entite)
     {
         for (int i = 0; i < _entite.Count; i++)
         {
-            _entite[i].TeamManager.AddEntites(entite);
+            teamManager.AddEntites(entite);
         }
     }
 
@@ -18,7 +20,7 @@ public class PM_EntiteTeamManagerTester : MonoBehaviour
     {
         for (int i = 0; i < entite.Count; i++)
         {
-            entite[i].TeamManager.ClearTeam();
+            teamManager.ClearTeam();
         }
 
     }

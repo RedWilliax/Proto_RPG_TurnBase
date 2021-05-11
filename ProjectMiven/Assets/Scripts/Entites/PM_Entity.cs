@@ -9,13 +9,15 @@ public class PM_Entity : MonoBehaviour
 
     [SerializeField] protected PM_Stats stats;
 
-    [SerializeField] protected PM_TeamManager teamManager;
+    [SerializeField] protected PM_TeamManager teamManager = null;
 
     [SerializeField] protected List<PM_Skill> allSkills;
 
     [SerializeField] protected List<PM_Effect> allEffects; // Apply each turn 
 
     [SerializeField] protected PM_Movement movement;
+
+    bool subscribeOnMove = false;
 
     public PM_Stats Stats { get => stats; }
     public PM_TeamManager TeamManager { get => teamManager; }
@@ -24,12 +26,15 @@ public class PM_Entity : MonoBehaviour
     private void Awake()
     {
         movement.InitMovement(this);
-
-        teamManager.AddEntite(this);
     }
 
     private void Start()
     {
+    }
+
+    public void SetTeamManager(PM_TeamManager _teamManager)
+    {
+        teamManager = _teamManager;
     }
 
     #region ManageEffect
@@ -43,6 +48,35 @@ public class PM_Entity : MonoBehaviour
         allEffects.Remove(_effect);
     }
 
+
+    #endregion
+
+    #region Movement
+    public void Move(Vector3 _pos)
+    {
+        movement.Move(_pos);
+    }
+
+    public void SubscribeMove()
+    {
+        if (subscribeOnMove) return;
+        PM_InputManager.OnClickLeftMouse += MoveEntity;
+        subscribeOnMove = true;
+    }
+
+    public void UnsubscribeMove()
+    {
+        if (!subscribeOnMove) return;
+        PM_InputManager.OnClickLeftMouse -= MoveEntity;
+        subscribeOnMove = false;
+    }
+
+
+    void MoveEntity(bool _do)
+    {
+        if (_do)
+            Move(PM_MousePointer.MousePosition);
+    }
 
     #endregion
 

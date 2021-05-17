@@ -6,7 +6,6 @@ public class PM_EntiteStatsTester : MonoBehaviour
 {
 
     [SerializeField] public PM_Entity entite;
-
     public void UpStats(Stats _stat, float _value)
     {
         switch (_stat)

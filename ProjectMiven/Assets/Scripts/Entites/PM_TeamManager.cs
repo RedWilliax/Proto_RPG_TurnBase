@@ -69,39 +69,29 @@ public class PM_TeamManager : MonoBehaviour
         }
         else
         {
-            if(_entite.ID == managerTeam.ID)
-                _entite.UnsubscribeMove();
-
-            _entite.SetTeamManager(null);
-
             team.Remove(_entite);
 
-            AllocateManagerTeam();
+            if (_entite.ID == managerTeam.ID)
+                ClearTeam();
         }
     }
 
     public void SetManagerTeam(PM_Entity _entity)
     {
-        if(ExistManagerTeam(out int _index))
+        if (ExistManagerTeam(out int _index))
             team[_index].UnsubscribeMove();
-        
+
         managerTeam = _entity;
         _entity.SubscribeMove();
     }
 
-    void AllocateManagerTeam()
-    {
-        if (team.Count <= 0)
-            return;
 
-        SetManagerTeam(team[0]);
-    }
 
     bool ExistManagerTeam(out int _index)
     {
         _index = -1;
 
-        for (int i = 0; i < team.Count ; i++)
+        for (int i = 0; i < team.Count; i++)
         {
 
             if (team[i].ID == managerTeam.ID)
